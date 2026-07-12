@@ -154,11 +154,11 @@ if st.session_state.phase == "done":
     st.markdown(f"""
 The Newsvendor Critical Ratio helps us determine the optimal order quantity:
 
-$$CR = \\frac{{p - c}}{{p - s}} = \\frac{{{P} - {C}}}{{{P} - {S}}} = {CR:.3f}$$
+$$CR = \\frac{{p - c}}{{p - s}} = \\frac{{{P} - {C}}}{{{P} - {S}}} = {c_ratio:.3f}$$
 
 Using the inverse normal CDF:
 
-$$Q^* = \\mu + z_{{CR}} \\cdot \\sigma = {mean} + {norm.ppf(CR):.2f} \\times {std} \\approx {Qs}$$
+$$Q^* = \\mu + z_{{CR}} \\cdot \\sigma = {mean} + {norm.ppf(c_ratio):.2f} \\times {std} \\approx {Qs}$$
 
 $$Q^* tells us the optimal number of newspapers to order each day in order to maximize profits. We can confirm this by completing Monte Carlo simulation. 
 After running 100,000 simulated days, the order quantity that 
