@@ -90,6 +90,7 @@ if st.session_state.phase == "done":
     opt_total = sum(opt_prof)
 
     st.markdown("## Week Complete!")
+    st.divider()
 
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -106,6 +107,7 @@ if st.session_state.phase == "done":
             st.success(f'**+${gap:.2f}**')
         else:
             st.error(f'**${gap:.2f}**')
+    st.divider()
 
 
 ###    #scatter of demand vs order
@@ -178,18 +180,13 @@ maximizes average profit converges to **Q* = {mcqstar} papers/day**.
 # ── GAME SCREEN ────────────────────────────────────────────────────────────────
 else:
     day = st.session_state.day
-    st.markdown(f'<span class="day-badge">Day {day} of {days}</span>', unsafe_allow_html=True)
-
-    # showing what day we are on
-    st.progress((day - 1) / days)
-    st.markdown("")
-
+    st.markdown(f'### Day {day} of {days}')
     # ── ORDER PHASE ────────────────────────────────────────────────────────────
     if st.session_state.phase == "order":
         st.markdown(f"### Choose how many papers you will order today")
 
         
-        st.markdown(f'<p class="label">Demand is normally distributed: Mean={mean}, Standard Deviation={std}</p>')
+        st.markdown(f'**Demand is normally distributed: Mean={mean}, Standard Deviation={std}**')
         order = st.slider("Order quantity", min_value=0, max_value=200,value=st.session_state.order_qty,step=1, key=f"slider_day_{day}")
         st.session_state.order_qty = order
 
@@ -206,7 +203,6 @@ else:
         profit, sold, left, short = compute_profit(order, demand)
 
         st.markdown(f"### Results")
-        st.markdown('<div class="result-box">')
 
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -220,13 +216,7 @@ else:
         st.markdown('</div>', unsafe_allow_html=True)
 
         verdict = "You made a profit!" if profit >= 0 else "You had a loss."
-        st.markdown(f"""
-<div class="info-box">
-  {verdict} &nbsp;
-  <>${profit:,.2f}</span>
-  &nbsp;today
-</div>
-""", unsafe_allow_html=True)
+        st.info(f'{verdict}${profit:,.2f}')
 
         if left > 0:
             st.info(f"You had **{left} unsold papers** salvaged at ${S:.2f} each (${left*S:.2f} recovered).")
