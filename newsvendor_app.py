@@ -213,9 +213,21 @@ if st.session_state.phase == "done":
     } for r in st.session_state.history])
     st.dataframe(display_df, use_container_width=True, hide_index=True)
 
+    
+        # Monte Carlo simulation test
+        qs = range(0,200,1)
+        mc_profits = []
+        for q in qs:
+            demand = np.random.normal(MU,SIGMA,10000).clip(0)
+            profit = np.minimum(demand,q)*PRICE + np.maximum(0,q-demand)*SALVAGE-q*COST
+            mc_profits.append(profit.mean())
+        mcqstar = list(qs)[mc_profits.index(max(mc_profits))]    
+    
     # Theory reveal
     with st.expander("📐 The Math Behind the Optimal Order Quantity"):
         st.markdown(f"""
+
+
 The **Newsvendor Critical Ratio** gives the theoretically optimal order quantity:
 
 $$CR = \\frac{{p - c}}{{p - s}} = \\frac{{{PRICE} - {COST}}}{{{PRICE} - {SALVAGE}}} = {CR:.3f}$$
@@ -227,16 +239,10 @@ Using the inverse normal CDF:
 $$Q^* = \\mu + z_{{CR}} \\cdot \\sigma = {MU} + {norm.ppf(CR):.2f} \\times {SIGMA} \\approx {Q_STAR}$$
 
 **Monte Carlo confirms this:** running 10,000 simulated weeks, the order quantity that 
-maximizes average profit converges to **Q* = {Q_STAR} papers/day**.
+maximizes average profit converges to **Q* = {mcqstar} papers/day**.
 """)
 
-        # Monte Carlo simulation test
-        qs = range(0,200,1)
-        mc_profits = []
-        for q in qs:
-            demand = np.random.normal(MU,SIGMA,10000).clip(0)
-            profit = np.minimum(demand,q)*PRICE + np.maximum(0,q-demand)*SALVAGE-q*COST
-            mc_profits.append(profit.mean())
+
 
         fig3 = go.Figure()
         fig3.add_scatter(x=list(qs), y=mc_profits, mode="lines",name="Expected Profit")
