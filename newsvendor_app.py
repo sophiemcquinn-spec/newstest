@@ -18,8 +18,8 @@ mean = 100
 std = 20 
 days = 7
 
-over = c-s
-under = p-c
+over = C-S
+under = P-C
 c_ratio = under/(under+over)
 Qs = mean + (0.09*std)
 
