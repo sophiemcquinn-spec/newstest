@@ -93,9 +93,11 @@ if st.session_state.phase == "done":
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Your Total Profit", f'${total:,.2f}')
+        st.markdown('### Your Total Profit")
+        st.metric("", f'${total:,.2f}')
     with col2:
-        st.metric("Optimal Q* Profit", f"${opt_total:,.2f}")
+        st.markdown('### Optimal Q* Profit')
+        st.metric("", f"${opt_total:,.2f}")
     with col3:
         gap = total - opt_total
         g_color = "green" if gap >= 0 else "red"
@@ -103,7 +105,7 @@ if st.session_state.phase == "done":
         if gap >= 0:
             st.success(f'+${gap:.2f}')
         else:
-            st.error(f'-${gap:.2f}')
+            st.error(f'${gap:.2f}')
 
 
 ###    #scatter of demand vs order
