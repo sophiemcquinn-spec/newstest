@@ -93,7 +93,7 @@ if st.session_state.phase == "done":
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown('### Your Total Profit")
+        st.markdown('### Your Total Profit')
         st.metric("", f'${total:,.2f}')
     with col2:
         st.markdown('### Optimal Q* Profit')
