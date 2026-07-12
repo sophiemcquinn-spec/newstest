@@ -230,21 +230,20 @@ $$Q^* = \\mu + z_{{CR}} \\cdot \\sigma = {MU} + {norm.ppf(CR):.2f} \\times {SIGM
 maximizes average profit converges to **Q* = {Q_STAR} papers/day**.
 """)
 
-        # Monte Carlo validation chart
-        qs = range(50, 160, 2)
+        # Monte Carlo simulation test
+        qs = range(0,200,1)
         mc_profits = []
         for q in qs:
-            demands = np.random.normal(MU, SIGMA, 5000).clip(0)
-            profits = np.minimum(demands, q)*PRICE + np.maximum(0,q-demands)*SALVAGE - q*COST
-            mc_profits.append(profits.mean())
+            demand = np.random.normal(mean,std,10000).clip(0)
+            profit = np.minimum(demand,q)*P + np.maximum(0,q-demand)*S-q*C
+            mc_profits.append(profit.mean())
 
         fig3 = go.Figure()
-        fig3.add_scatter(x=list(qs), y=mc_profits, mode="lines",
-                         line=dict(color="#1f77b4", width=2), name="Expected Profit")
-        fig3.add_vline(x=Q_STAR, line_dash="dash", line_color="#2ca02c",
+        fig3.add_scatter(x=list(qs), y=mc_profits, mode="lines",name="Expected Profit")
+        fig3.add_vline(x=Qs, line_dash="dash", line_color="#2ca02c",
                        annotation_text=f"Q*={Q_STAR}", annotation_position="top right")
         fig3.update_layout(
-            title="Monte Carlo: Expected Profit vs. Order Quantity (5,000 trials)",
+            title="Monte Carlo: Expected Profit vs. Order Quantity (10,000 trials)",
             xaxis_title="Order Quantity", yaxis_title="Expected Daily Profit ($)",
             plot_bgcolor="white", height=300
         )
