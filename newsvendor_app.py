@@ -96,12 +96,12 @@ if st.session_state.phase == "done":
         st.markdown('### Your Total Profit')
         st.metric("", f'${total:,.2f}')
     with col2:
-        st.markdown('### Optimal Q* Profit')
+        st.markdown('### Optimal Q* ')
         st.metric("", f"${opt_total:,.2f}")
     with col3:
         gap = total - opt_total
         g_color = "green" if gap >= 0 else "red"
-        st.markdown('### Yours vs. Optimal')
+        st.markdown('### Difference')
         if gap >= 0:
             st.success(f'**+${gap:.2f}**')
         else:
