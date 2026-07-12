@@ -213,10 +213,10 @@ else:
             leftover_str = f"{left} left" if left > 0 else f"{short} short"
             st.metric("Outcome", leftover_str)
 
-        st.markdown('</div>', unsafe_allow_html=True)
-
-        verdict = "You made a profit!" if profit >= 0 else "You had a loss."
-        st.info(f'{verdict}${profit:,.2f}')
+        if profit >= 0:
+            st.success(f'You made a profit of ${profit:,.2f}')
+        else:
+            st.error(f'You had a loss of ${profit:,.2f}')
 
         if left > 0:
             st.info(f"You had **{left} unsold papers** salvaged at ${S:.2f} each (${left*S:.2f} recovered).")
