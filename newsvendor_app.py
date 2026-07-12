@@ -144,7 +144,7 @@ if st.session_state.phase == "done":
     qs = range(0,200,1)
     mc_profits = []
     for q in qs:
-        demand = np.random.normal(mean,std,100000).clip(0)
+        demand = np.random.normal(mean,std,1000000).clip(0)
         profit = np.minimum(demand,q)*P + np.maximum(0,q-demand)*S-q*C
         mc_profits.append(profit.mean())
     mcqstar = list(qs)[mc_profits.index(max(mc_profits))]
@@ -160,8 +160,8 @@ Using the inverse normal CDF:
 
 $$Q^* = \\mu + z_{{CR}} \\cdot \\sigma = {mean} + {norm.ppf(c_ratio):.2f} \\times {std} \\approx {Qs}$$
 
-Q^* tells us the optimal number of newspapers to order each day in order to maximize profits. We can confirm this by completing Monte Carlo simulation. 
-After running 100,000 simulated days, the order quantity that 
+Q* tells us the optimal number of newspapers to order each day in order to maximize profits. We can confirm this by completing Monte Carlo simulation. 
+After running 1,000,000 simulated days, the order quantity that 
 maximizes average profit converges to **Q* = {mcqstar} papers/day**.
 """)
 
@@ -169,7 +169,7 @@ maximizes average profit converges to **Q* = {mcqstar} papers/day**.
     fig3.add_scatter(x=list(qs), y=mc_profits, mode="lines",name="Expected Profit")
     fig3.add_vline(x=mcqstar, line_dash="dash", annotation_text=f"Q*={mcqstar}", annotation_position="middle right")
     fig3.update_layout(
-        title="Monte Carlo Simulation: Expected Profit vs. Order Quantity (100,000 trials)",
+        title="Monte Carlo Simulation: Expected Profit vs. Order Quantity (1,000,000 trials)",
         xaxis_title="Order Quantity", yaxis_title="Expected Daily Profit ($)")
     st.plotly_chart(fig3, use_container_width=True)
 
