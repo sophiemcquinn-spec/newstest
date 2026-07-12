@@ -21,7 +21,7 @@ days = 7
 over = C-S
 under = P-C
 c_ratio = under/(under+over)
-Qs = mean + (0.09*std)
+Qs = mean + (0.14*std)
 
 # ── Session state init ─────────────────────────────────────────────────────────
 def init_state():
