@@ -215,13 +215,13 @@ if st.session_state.phase == "done":
 
     
         # Monte Carlo simulation test
-        qs = range(0,200,1)
-        mc_profits = []
-        for q in qs:
-            demand = np.random.normal(MU,SIGMA,10000).clip(0)
-            profit = np.minimum(demand,q)*PRICE + np.maximum(0,q-demand)*SALVAGE-q*COST
-            mc_profits.append(profit.mean())
-        mcqstar = list(qs)[mc_profits.index(max(mc_profits))]    
+    qs = range(0,200,1)
+    mc_profits = []
+    for q in qs:
+        demand = np.random.normal(MU,SIGMA,10000).clip(0)
+        profit = np.minimum(demand,q)*PRICE + np.maximum(0,q-demand)*SALVAGE-q*COST
+        mc_profits.append(profit.mean())
+    mcqstar = list(qs)[mc_profits.index(max(mc_profits))]    
     
     # Theory reveal
     with st.expander("📐 The Math Behind the Optimal Order Quantity"):
