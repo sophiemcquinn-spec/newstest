@@ -240,7 +240,7 @@ maximizes average profit converges to **Q* = {Q_STAR} papers/day**.
 
         fig3 = go.Figure()
         fig3.add_scatter(x=list(qs), y=mc_profits, mode="lines",name="Expected Profit")
-        fig3.add_vline(x=Qs, line_dash="dash", line_color="#2ca02c",
+        fig3.add_vline(x=Q_STAR, line_dash="dash", line_color="#2ca02c",
                        annotation_text=f"Q*={Q_STAR}", annotation_position="top right")
         fig3.update_layout(
             title="Monte Carlo: Expected Profit vs. Order Quantity (10,000 trials)",
