@@ -234,8 +234,8 @@ maximizes average profit converges to **Q* = {Q_STAR} papers/day**.
         qs = range(0,200,1)
         mc_profits = []
         for q in qs:
-            demand = np.random.normal(mean,std,10000).clip(0)
-            profit = np.minimum(demand,q)*P + np.maximum(0,q-demand)*S-q*C
+            demand = np.random.normal(MU,SIGMA,10000).clip(0)
+            profit = np.minimum(demand,q)*PRICE + np.maximum(0,q-demand)*SALVAGE-q*COST
             mc_profits.append(profit.mean())
 
         fig3 = go.Figure()
