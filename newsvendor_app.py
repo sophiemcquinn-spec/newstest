@@ -103,9 +103,9 @@ if st.session_state.phase == "done":
         g_color = "green" if gap >= 0 else "red"
         st.markdown('### Yours vs. Optimal')
         if gap >= 0:
-            st.success(f'+${gap:.2f}')
+            st.success(f'**+${gap:.2f}**')
         else:
-            st.error(f'${gap:.2f}')
+            st.error(f'**${gap:.2f}**')
 
 
 ###    #scatter of demand vs order
