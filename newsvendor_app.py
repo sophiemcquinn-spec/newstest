@@ -146,7 +146,7 @@ if st.session_state.phase == "done":
 
     
     # MC and newsvendor problem discussion
-        st.markdown(f"""
+    st.markdown(f"""
 The Newsvendor Critical Ratio helps us determine the optimal order quantity:
 
 $$CR = \\frac{{p - c}}{{p - s}} = \\frac{{{P} - {C}}}{{{P} - {S}}} = {CR:.3f}$$
