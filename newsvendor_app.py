@@ -127,7 +127,7 @@ if st.session_state.phase == "done":
     st.plotly_chart(fig2, use_container_width=True)
 
     # summary table
-    st.markdown("###Summary")
+    st.markdown("### Summary")
     display_df = pd.DataFrame([{
         "Day": r["day"],
         "Ordered": r["order"],
@@ -151,6 +151,7 @@ if st.session_state.phase == "done":
 
     
     # MC and newsvendor problem discussion
+    st.markdown('## Monte Carlo Simulation')
     st.markdown(f"""
 The Newsvendor Critical Ratio helps us determine the optimal order quantity:
 
