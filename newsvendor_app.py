@@ -13,7 +13,7 @@ st.set_page_config(
 #parameters
 P = 1.00 #sell price
 C = 0.50 #purchase cost
-S = 0.10 #salvage
+S = 0.05 #salvage
 mean = 100
 std = 20 
 days = 7
@@ -65,7 +65,7 @@ with st.sidebar:
 |------|-------|
 | Selling price | $1.00 / paper |
 | Purchase cost | $0.50 / paper |
-| Salvage value | $0.10 / paper |
+| Salvage value | $0.05 / paper |
 | Average daily demand  | 100 papers/day |
 | Standard deviation | 20 papers/day |
 """)
@@ -219,9 +219,9 @@ else:
             st.error(f'You had a loss of ${profit:,.2f}')
 
         if left > 0:
-            st.info(f"You had **{left} unsold papers** salvaged at ${S:.2f} each (${left*S:.2f} recovered).")
+            st.info(f"You had {left} unsold papers salvaged at 5 cents each (${left*S:.2f} recovered).")
         if short > 0:
-            st.warning(f"You **ran out** and missed **{short} sales** — lost revenue of ${short*(P-C):.2f}.")
+            st.info(f"You ran out and missed {short} potential sales (lost revenue of ${short*(P-C):.2f}).")
 
         # Save to history
         if len(st.session_state.history) < day:
