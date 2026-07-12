@@ -206,7 +206,7 @@ else:
         with col1:
             st.metric("You ordered", f"{order} papers")
         with col2:
-            st.metric("Demand was", f"{demand} papers",
+            st.metric("Demand was", f"{demand} papers")
         with col3:
             leftover_str = f"{left} left" if left > 0 else f"{short} short"
             st.metric("Outcome", left_str)
