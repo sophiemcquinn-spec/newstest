@@ -85,7 +85,7 @@ if st.session_state.phase == "done":
     opt_prof = []
     for row in st.session_state.history:
         p, *_ = compute_profit(Qs, row["demand"])
-        opt_profits.append(p)
+        opt_prof.append(p)
     opt_total = sum(opt_prof)
 
     st.markdown("## Week Complete!")
@@ -105,6 +105,7 @@ if st.session_state.phase == "done":
 
 
 ###    #scatter of demand vs order
+    fig2 = go.Figure()
     fig2.add_scatter(
         x=[f"Day {r['day']}" for r in st.session_state.history],
         y=[r["order"] for r in st.session_state.history],
@@ -180,7 +181,7 @@ else:
 
     # ── ORDER PHASE ────────────────────────────────────────────────────────────
     if st.session_state.phase == "order":
-        st.markdown(f"###Choose how many papers you will order today")
+        st.markdown(f"### Choose how many papers you will order today")
 
         
         st.markdown(f'<p class="label">Demand is normally distributed: Mean={mean}, Standard Deviation={std}</p>')
@@ -199,7 +200,7 @@ else:
         demand = st.session_state.demand_today
         profit, sold, left, short = compute_profit(order, demand)
 
-        st.markdown(f"###Results")
+        st.markdown(f"### Results")
         st.markdown('<div class="result-box">')
 
         col1, col2, col3 = st.columns(3)
@@ -209,7 +210,7 @@ else:
             st.metric("Demand was", f"{demand} papers")
         with col3:
             leftover_str = f"{left} left" if left > 0 else f"{short} short"
-            st.metric("Outcome", left_str)
+            st.metric("Outcome", leftover_str)
 
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -225,7 +226,7 @@ else:
         if left > 0:
             st.info(f"You had **{left} unsold papers** salvaged at ${S:.2f} each (${left*S:.2f} recovered).")
         if short > 0:
-            st.warning(f"You **ran out** and missed **{short} sales** — lost revenue of ${shorte*(P-C):.2f}.")
+            st.warning(f"You **ran out** and missed **{short} sales** — lost revenue of ${short*(P-C):.2f}.")
 
         # Save to history
         if len(st.session_state.history) < day:
@@ -237,7 +238,7 @@ else:
 
 
         # Next button
-        if day < DAYS:
+        if day < days:
             if st.button(f" Go to day {day + 1}"):
                 st.session_state.day  += 1
                 st.session_state.phase = "order"
