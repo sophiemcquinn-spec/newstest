@@ -54,12 +54,12 @@ def reset_game():
             del st.session_state[key]
     st.rerun()
 
-st.markdown("#The Newsvendor Problem")
-st.markdown("*Run a newsstand for a week. Compare your results to optimal results at the end.*")
+st.markdown("# The Newsvendor Problem")
+st.markdown("*Run a news stand for a week. Compare your results to optimal results at the end.*")
 
 #sidebar showing known values
 with st.sidebar:
-    st.markdown("Known Values")
+    st.markdown("## Known Values")
     st.markdown(f"""
 | Selling price | $1.00 / paper |
 | Purchase cost | $0.50 / paper |
@@ -70,10 +70,10 @@ with st.sidebar:
     st.divider()
     if st.session_state.phase != "done":
         total = running_total()
-        st.markdown(f"### Running Total")
-        st.markdown(f'<p>${total:,.2f}</p>')
+        st.markdown(f"## Running Total")
+        st.metric(f'${total:,.2f}>')
     st.divider()
-    if st.button("🔄 Restart Game"):
+    if st.button("Restart Game"):
         reset_game()
 
 # ── DONE SCREEN ────────────────────────────────────────────────────────────────
@@ -92,16 +92,19 @@ if st.session_state.phase == "done":
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown('<p class="label">Your Total Profit</p>')
-        st.markdown(f'<p>${total:,.2f}</p>')
+        st.markdown('### Your Total Profit')
+        st.metric(f'${total:,.2f}')
     with col2:
-        st.markdown('<p class="label">Optimal Q* Total</p>')
-        st.markdown(f'<p>${opt_total:,.2f}</p>')
+        st.markdown('### Optimal Q* Profit')
+        st.metric(f'${opt_total:,.2f}')
     with col3:
         gap = total - opt_total
         g_color = "green" if gap >= 0 else "red"
-        st.markdown('<p class="label">Yours vs. Optimal</p>')
- ###       st.markdown(f'<p class="{g_color}" style="font-size:2rem;font-weight:700">{("+" if gap>=0 else "")}{gap:,.2f}</p>', unsafe_allow_html=True)
+        st.markdown('### Yours vs. Optimal')
+        if gap >= 0:
+            st.success(f'+${gap:.2f})
+        else:
+            st.error(f'-${gap:.2f})
 
 
 ###    #scatter of demand vs order
