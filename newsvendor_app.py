@@ -61,6 +61,8 @@ st.markdown("*Run a news stand for a week. Compare your results to optimal resul
 with st.sidebar:
     st.markdown("## Known Values")
     st.markdown(f"""
+| Argument | Value |
+|------|-------|
 | Selling price | $1.00 / paper |
 | Purchase cost | $0.50 / paper |
 | Salvage value | $0.10 / paper |
@@ -70,8 +72,7 @@ with st.sidebar:
     st.divider()
     if st.session_state.phase != "done":
         total = running_total()
-        st.markdown(f"## Running Total")
-        st.metric(f'${total:,.2f}>')
+        st.metric("Running Total", f'${total:,.2f}')
     st.divider()
     if st.button("Restart Game"):
         reset_game()
