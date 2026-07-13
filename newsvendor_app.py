@@ -21,7 +21,7 @@ days = 7
 over = C-S
 under = P-C
 c_ratio = under/(under+over)
-Qs = (norm.ppf(c_ratio, mean, std))
+Qs = round(norm.ppf(c_ratio, mean, std),1)
 
 # ── Session state init ─────────────────────────────────────────────────────────
 def init_state():
