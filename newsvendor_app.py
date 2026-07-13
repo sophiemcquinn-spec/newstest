@@ -15,7 +15,7 @@ P = 1.00 #sell price
 C = 0.50 #purchase cost
 S = 0.05 #salvage
 mean = 100
-std = 20 
+std = 25 
 days = 7
 
 over = C-S
