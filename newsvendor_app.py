@@ -187,7 +187,7 @@ else:
 
         
         st.markdown(f'**Demand is normally distributed: Mean={mean}, Standard Deviation={std}**')
-        order = st.slider("Order quantity", min_value=0, max_value=200,value=st.session_state.order_qty,step=1, key=f"slider_day_{day}")
+        order = st.slider("Order quantity", min_value=0, max_value=500,value=st.session_state.order_qty,step=1, key=f"slider_day_{day}")
         st.session_state.order_qty = order
 
         if st.button(f"Order {order} papers →"):
